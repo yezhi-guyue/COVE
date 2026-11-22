@@ -104,19 +104,8 @@
     }
     push();
   }
-  /* 没有桥就没法存 不要跳 covels: 那样整页会被浏览器吞掉 只提醒一句 */
-  function sendByScheme(json, n, sid){
-    try{
-      if(!window.__coveWarn){
-        window.__coveWarn=1;
-        var d=document.createElement('div');
-        d.style.cssText='position:fixed;left:0;right:0;top:0;z-index:999999;background:#8a5a17;color:#fff;font:13px/1.7 -apple-system,sans-serif;padding:9px 14px;text-align:center;box-shadow:0 2px 10px rgba(0,0,0,.18)';
-        d.textContent='这次是从浏览器或预览里打开的 存不进屋子 请从侧边栏的 COVE 进去再改';
-        (document.body||document.documentElement).appendChild(d);
-        setTimeout(function(){ d.style.transition='opacity .6s'; d.style.opacity='0'; setTimeout(function(){ try{ d.parentNode.removeChild(d); }catch(e){} window.__coveWarn=0; },700); }, 5200);
-      }
-    }catch(e){}
-  }
+  /* 外面没有桥就什么也不做 不弹任何提示 */
+  function sendByScheme(json, n, sid){}
   function send(json){
     if(IS_STATIC){ busyUntil=0;
       try{ if(orig) orig.setItem('__cove_disk', json); }catch(e){}
